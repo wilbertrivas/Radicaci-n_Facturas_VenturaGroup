@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>Selección de fecha en calendarios emergentes</title>
+</head>
+
+<BODY style="font-family: Verdana">
+<p align="center"><b>Selección de fecha en calendarios emergentes</b></p>
+
+<HEAD>
+
+<script language="JavaScript" src="mostrarcalendario.js">
+
+</script>
+<script language="JavaScript" src="calendarioeme.js"></script>
+</HEAD>
+
+
+<BODY style="font-family: Verdana">
+
+<!-- This script and many more are available free online at -->
+<!-- The JavaScript Source!! http://javascript.internet.com -->
+<!-- Original:  James O'Connor (joconnor@nordenterprises.com) -->
+<!-- Web Site:  http://nordenterprises.com -->
+<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>
+<p>Ejemplo de calendarios popup:</p>
+<form name="sample" method="post" action="popupcalsample.html">
+	<p>Fecha de inicio: <input type="text" name="T1" size="20">  
+	<!-- ggPosX and ggPosY not set, so popup will autolocate to the right of the graphic -->
+	<a href="javascript:show_calendar('sample.T1');" onMouseOver="window.status='Elige fecha'; overlib('Pulsa para elegir fecha del mes actual en el calendario emergente.'); return true;" onMouseOut="window.status=''; nd(); return true;">
+    <img src="show-calendar.gif" width=24 height=22 border=0></a>
+	</p>
+	<p>Fecha de fin:     <input type="text" name="T2"	size="20">  
+	<!-- ggPosX and ggPosY are set, so popup goes where you tell it -->
+	<a href="javascript:ggPosX=5;ggPosY=200;show_yearly_calendar('sample.T2');" onMouseOver="window.status='Date Picker'; overlib('Pulsa para elegir fecha del año en curso en el calendario emergente..'); return true;" onMouseOut="window.status=''; nd(); return true;">
+    <img src="show-calendar.gif" width=24 height=22 border=0></a>
+	</p>
+	<p><input type="submit" value="Enviar" name="B1"><input type="reset"
+	value="Borrar" name="B2"></p>
+</form>
+
+<center>
+Archivos:<br>
+<a href="overlib_mini.js">overlib_mini.js</a><br>
+<a href="show-calendar.gif">show-calendar.gif</a></center><p>

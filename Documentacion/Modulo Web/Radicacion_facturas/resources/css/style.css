@@ -1,0 +1,148 @@
+body {
+    font-family: "Verdana";
+    font-size: 11px;
+    color: #444444;
+    padding: 20px;
+	background-color: #ffffff;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+table {
+	background-color: #ffffff;
+}
+
+thead {
+    font-weight: bold;
+    color: black;
+    background-color: #D3DBE9;
+}
+
+tbody {
+    font-family: "Verdana";
+    font-size: 11px;
+    color: #444444;
+}
+
+td {
+    text-align: left;
+}
+
+fieldset {
+    border: 1px solid #999;
+    padding: 10px;
+}
+
+.examinar {
+    color: #000000;
+    font-family: "Verdana";
+	font-weight: bold;
+	background-color:#FFFFFF;
+	border: 1px solid #066;
+    cursor: pointer;
+    height: 25px;
+}
+
+legend {
+    padding: 1px 4px;
+    border-color: #999 #ccc #ccc #999;
+    border-style: solid;
+    border-width: 1px;
+    background: #eee;
+    font-weight: bold;
+}
+
+input {
+    background: white;
+    color:  #444444;
+	border: 1px solid #066;
+    font-family:"Verdana";
+    font-size: 11px;
+    height: 17px;
+}
+
+.login {
+    background: white;
+    color:  #444444;
+	border: 1px solid #066;
+    font-family:"Verdana";
+    font-size: 11px;
+    height: 17px;
+	background-position: left center;
+	padding-left: 17px;
+	width:183px;
+	background-image: url(../img/comunes/Usuario.png);
+	background-repeat: no-repeat;
+}
+
+.password {
+    background: white;
+    color:  #444444;
+	border: 1px solid #066;
+    font-family:"Verdana";
+    font-size: 11px;
+    height: 17px;
+	background-position: left center;
+	padding-left: 17px;
+	width:183px;
+	background-image: url(../img/comunes/Llave.png);
+	background-repeat: no-repeat;
+}
+
+select {
+    background: white;
+    color: #444444;
+	border: 1px solid #066;
+    font-family:"Verdana";
+    font-size: 11px;
+	font-weight: bold;
+    height: 17px;
+	width: 150px;
+}
+
+textarea {
+    background: white;
+    color: #444444;
+	border: 1px solid #066;
+    font-family:"Verdana";
+    font-size: 11px;
+    height:90px;
+    width:100%;
+}
+
+label {
+	font-weight: bold;
+}
+
+A:link {
+	color:blue;
+}
+
+A:visited {
+	color:blue;
+}
+
+A img {
+	border:0;
+}
+
+.button {
+    color: #FFFFFF;
+    font-family: "Verdana";
+	font-weight: bold;
+	background:url(../img/comunes/FondoBoton.gif) repeat-x; 
+	border: 1px solid #066;
+    cursor: pointer;
+    height: 25px;
+}
+
+.FormBox {
+    background-color: #f3f3f3;
+}
+
+.TextBold{font-weight:bold;}
+.TextItalic{font-style:italic;}
+.TextNormal{font-weight:normal;font-style:normal;white-space:normal;text-transform:none;letter-spacing:normal;}
+.TextHighlight{color:#F07522;font-weight:bold;}

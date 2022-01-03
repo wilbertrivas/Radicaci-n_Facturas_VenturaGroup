@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="3800" pageHeight="960" columnWidth="3800" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true">
+	<property name="ireport.zoom" value="3.5369215365000275"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nitEmpresa" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT  
+                                    d.id_documento AS documento_id_documento, 
+                                    d.numFactura_documento AS documento_numFactura_documento, 
+                                    d.nit_proveedor AS documento_nit_proveedor, 
+                                    d.observacion_documento AS documento_observacion_documento, 
+                                    d.id_estadoDocumento AS documento_id_estadoDocumento, 
+                                    d.id_usuario AS documento_id_usuario, 
+                                    d.nit_empresa AS documento_nit_empresa, 
+                                    d.id_sede AS documento_id_sede, 
+                                    d.fechaAnulacion_documento AS documento_fechaAnulacion_documento, 
+                                    d.observacionAnulacion_documento AS documento_observacionAnulacion_documento, 
+
+                                    ed.id_estadoDocumento AS estadodocumento_id_estadoDocumento, 
+                                    ed.descripcion_estadoDocumento AS estadodocumento_descripcion_estadoDocumento, 
+
+                                    p.nit_proveedor AS proveedor_nit_proveedor, 
+                                    p.dig_proveedor AS proveedor_dig_proveedor, 
+                                    p.nombre_proveedor AS proveedor_nombre_proveedor, 
+                                    p.correo_proveedor AS proveedor_correo_proveedor, 
+                                    p.telefono_proveedor AS proveedor_telefono_proveedor, 
+                                    p.id_estadoProveedor AS proveedor_id_estadoProveedor, 
+
+                                    ep.id_estadoProveedor AS estadoProveedor_id_estadoProveedor, 
+                                    ep.descripcion_estadoProveedor AS estadoProveedor_descripcion_estadoProveedor, 
+
+                                    e.nit_empresa AS empresa_nit_empresa, 
+                                    e.dig_empresa AS empresa_dig_empresa, 
+                                    e.nombre_empresa AS empresa_nombre_empresa, 
+                                    e.correo_empresa AS empresa_correo_empresa, 
+                                    e.telefono_empresa AS empresa_telefono_empresa, 
+                                    e.id_estadoEmpresa AS empresa_id_estadoEmpresa, 
+
+                                    ee.id_estadoEmpresa AS estadoempresa_id_estadoEmpresa, 
+                                    ee.descripcion_estadoEmpresa AS estadoempresa_descripcion_estadoEmpresa, 
+
+                                    h.id_historicoDocumento AS historicodocumento_id_historicoDocumento, 
+                                    h.id_documento AS historicodocumento_id_documento, 
+                                    h.usuarioRegistro_historicoDocumento AS historicodocumento_usuarioRegistro_historicoDocumento, 
+                                    h.usuarioDestino_historicoDocumento AS historicodocumento_usuarioDestino_historicoDocumento, 
+                                    h.observacion_historicoDocumento AS historicodocumento_observacion_historicoDocumento, 
+                                    h.fechaRegistro_historicoDocumento AS historicodocumento_fechaRegistro_historicoDocumento, 
+h.fechaConfirmacion_historicoDocumento AS historicoDocumento_fechaConfirmacion_historicoDocumento,
+                                    h.id_estadoHistorico AS historicodocumento_id_estadoHistorico, 
+                                    h.id_confirmacionRecibido AS historicodocumento_id_confirmacionRecibido, 
+                                    eh.id_estadoHistorico AS estadohistorico_id_estadoHistorico, 
+                                    eh.descripcion_estadoHistorico AS estadohistorico_descripcion_estadoHistorico, 
+
+                                    c.id_confirmacionRecibido AS confirmacionrecibido_id_confirmacionRecibido, 
+                                    c.descripcion_confirmacionRecibido AS confirmacionrecibido_descripcion_confirmacionRecibido, 
+
+                                    s.id_sede AS sede_id_sede, 
+                                    s.nombre_sede AS sede_nombre_sede, 
+                                    s.id_estadoSede AS sede_id_estadoSede, 
+
+                                    es.id_estadoSede AS estadosede_id_estadoSede, 
+                                    es.descripcion_estadoSede AS estadosede_descripcion_estadoSede, 
+
+                                    u.id_usuario AS usuario_id_usuario, 
+                                    u.nombre_usuario AS usuario_nombre_usuario, 
+                                    u.apellido_usuario AS usuario_apellido_usuario, 
+                                    u.mail_usuario AS usuario_mail_usuario, 
+                                    u.id_estadoUsuario AS usuario_id_estadoUsuario  
+
+                                     FROM `radicado_facturas_vg`.documento d  
+                                             INNER JOIN `radicado_facturas_vg`.estadoDocumento ed  ON ed.id_estadoDocumento = d.id_estadoDocumento 
+                                             INNER JOIN `radicado_facturas_vg`.proveedor p  ON p.nit_proveedor = d.nit_proveedor 
+                                             INNER JOIN `radicado_facturas_vg`.estadoProveedor ep  ON ep.id_estadoProveedor = p.id_estadoProveedor 
+                                             INNER JOIN `radicado_facturas_vg`.empresa e  ON e.nit_empresa = d.nit_empresa 
+                                             INNER JOIN `radicado_facturas_vg`.estadoEmpresa ee  ON ee.id_estadoEmpresa = e.id_estadoEmpresa 
+                                             INNER JOIN `radicado_facturas_vg`.historicoDocumento h  ON h.id_documento = d.id_documento 
+                                             INNER JOIN `radicado_facturas_vg`.estadoHistorico eh  ON eh.id_estadoHistorico = h.id_estadoHistorico 
+                                             INNER JOIN `radicado_facturas_vg`.confirmacionRecibido c  ON c.id_confirmacionRecibido = h.id_confirmacionRecibido 
+                                             INNER JOIN `radicado_facturas_vg`.sede s  ON s.id_sede = d.id_sede 
+                                             INNER JOIN `radicado_facturas_vg`.estadoSede es  ON es.id_estadoSede = s.id_estadoSede 
+                                             INNER JOIN `radicado_facturas_vg`.usuario u  ON u.id_usuario = d.id_usuario WHERE d.nit_empresa =$P{nitEmpresa} ORDER BY h.id_historicoDocumento ASC;]]>
+	</queryString>
+	<field name="documento_id_documento" class="java.lang.Integer"/>
+	<field name="documento_numFactura_documento" class="java.lang.String"/>
+	<field name="documento_nit_proveedor" class="java.lang.Long"/>
+	<field name="documento_observacion_documento" class="java.lang.String"/>
+	<field name="documento_id_estadoDocumento" class="java.lang.Integer"/>
+	<field name="documento_id_usuario" class="java.lang.String"/>
+	<field name="documento_nit_empresa" class="java.lang.Long"/>
+	<field name="documento_id_sede" class="java.lang.Integer"/>
+	<field name="documento_fechaAnulacion_documento" class="java.sql.Timestamp"/>
+	<field name="documento_observacionAnulacion_documento" class="java.lang.String"/>
+	<field name="estadodocumento_id_estadoDocumento" class="java.lang.Integer"/>
+	<field name="estadodocumento_descripcion_estadoDocumento" class="java.lang.String"/>
+	<field name="proveedor_nit_proveedor" class="java.lang.Long"/>
+	<field name="proveedor_dig_proveedor" class="java.lang.Integer"/>
+	<field name="proveedor_nombre_proveedor" class="java.lang.String"/>
+	<field name="proveedor_correo_proveedor" class="java.lang.String"/>
+	<field name="proveedor_telefono_proveedor" class="java.lang.String"/>
+	<field name="proveedor_id_estadoProveedor" class="java.lang.Integer"/>
+	<field name="estadoProveedor_id_estadoProveedor" class="java.lang.Integer"/>
+	<field name="estadoProveedor_descripcion_estadoProveedor" class="java.lang.String"/>
+	<field name="empresa_nit_empresa" class="java.lang.Long"/>
+	<field name="empresa_dig_empresa" class="java.lang.Integer"/>
+	<field name="empresa_nombre_empresa" class="java.lang.String"/>
+	<field name="empresa_correo_empresa" class="java.lang.String"/>
+	<field name="empresa_telefono_empresa" class="java.lang.String"/>
+	<field name="empresa_id_estadoEmpresa" class="java.lang.Integer"/>
+	<field name="estadoempresa_id_estadoEmpresa" class="java.lang.Integer"/>
+	<field name="estadoempresa_descripcion_estadoEmpresa" class="java.lang.String"/>
+	<field name="historicodocumento_id_historicoDocumento" class="java.lang.Integer"/>
+	<field name="historicodocumento_id_documento" class="java.lang.Integer"/>
+	<field name="historicodocumento_usuarioRegistro_historicoDocumento" class="java.lang.String"/>
+	<field name="historicodocumento_usuarioDestino_historicoDocumento" class="java.lang.String"/>
+	<field name="historicodocumento_observacion_historicoDocumento" class="java.lang.String"/>
+	<field name="historicodocumento_fechaRegistro_historicoDocumento" class="java.sql.Timestamp"/>
+	<field name="historicoDocumento_fechaConfirmacion_historicoDocumento" class="java.sql.Timestamp"/>
+	<field name="historicodocumento_id_estadoHistorico" class="java.lang.Integer"/>
+	<field name="historicodocumento_id_confirmacionRecibido" class="java.lang.Integer"/>
+	<field name="estadohistorico_id_estadoHistorico" class="java.lang.Integer"/>
+	<field name="estadohistorico_descripcion_estadoHistorico" class="java.lang.String"/>
+	<field name="confirmacionrecibido_id_confirmacionRecibido" class="java.lang.Integer"/>
+	<field name="confirmacionrecibido_descripcion_confirmacionRecibido" class="java.lang.String"/>
+	<field name="sede_id_sede" class="java.lang.Integer"/>
+	<field name="sede_nombre_sede" class="java.lang.String"/>
+	<field name="sede_id_estadoSede" class="java.lang.Integer"/>
+	<field name="estadosede_id_estadoSede" class="java.lang.Integer"/>
+	<field name="estadosede_descripcion_estadoSede" class="java.lang.String"/>
+	<field name="usuario_id_usuario" class="java.lang.String"/>
+	<field name="usuario_nombre_usuario" class="java.lang.String"/>
+	<field name="usuario_apellido_usuario" class="java.lang.String"/>
+	<field name="usuario_mail_usuario" class="java.lang.String"/>
+	<field name="usuario_id_estadoUsuario" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="16">
+			<staticText>
+				<reportElement x="0" y="0" width="108" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[ID_HISTORICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="0" width="101" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ID_DOCUMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="209" y="0" width="108" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[No. FACTURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="317" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[NIT_PROVEEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="762" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTADO_HISTORICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1158" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[USUARIO_DESTINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1026" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[USUARIO_ORIGEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="0" width="313" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[NOMBRE_PROVEEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="894" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ESTADO_DOCUMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1422" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[SEDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1290" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[EMPRESA_DESTINO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1554" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA_REGISTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1818" y="0" width="917" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[OBSERVACION DOCUMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1686" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA_CONFIRMACION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2735" y="0" width="132" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FECHA_ANULACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2867" y="0" width="933" height="16" backcolor="#CCCCCC"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[OBSERVACION_ANULACIÓN]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="15">
+			<textField>
+				<reportElement x="0" y="0" width="108" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{historicodocumento_id_historicoDocumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="894" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadodocumento_descripcion_estadoDocumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1422" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sede_nombre_sede}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="762" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{estadohistorico_descripcion_estadoHistorico}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="0" width="313" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proveedor_nombre_proveedor}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="0" width="101" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documento_id_documento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2867" y="0" width="933" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documento_observacionAnulacion_documento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="317" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documento_nit_proveedor}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1158" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{historicodocumento_usuarioDestino_historicoDocumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1818" y="0" width="917" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documento_observacion_documento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1686" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{historicoDocumento_fechaConfirmacion_historicoDocumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="209" y="0" width="108" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documento_numFactura_documento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1026" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{historicodocumento_usuarioRegistro_historicoDocumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1554" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{historicodocumento_fechaRegistro_historicoDocumento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2735" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{documento_fechaAnulacion_documento}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1290" y="0" width="132" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{empresa_nombre_empresa}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
